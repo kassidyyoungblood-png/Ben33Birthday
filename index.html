@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* Floating Particles */
         .particle {
             position: fixed;
             background: rgba(255, 255, 255, 0.2);
@@ -71,7 +70,7 @@
             perspective: 1200px;
         }
 
-        .card-container { height: var(--card-height); cursor: pointer; }
+        .card-container { height: var(--card-height); cursor: pointer; -webkit-tap-highlight-color: transparent; }
         .card-inner {
             position: relative; width: 100%; height: 100%;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -121,14 +120,10 @@
             transition: all 0.3s;
             text-transform: uppercase; letter-spacing: 2px;
             position: relative;
-            z-index: 999; /* Ensures button is "above" the card for clicks */
+            z-index: 999;
         }
-        .directions-link:hover { 
-            background: var(--neon-blue); 
-            color: #000; 
-            box-shadow: 0 0 25px var(--neon-blue);
-        }
-        .directions-link svg { margin-right: 10px; fill: currentColor; }
+        .directions-link:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 25px var(--neon-blue); }
+        .directions-link svg { margin-right: 10px; fill: currentColor; pointer-events: none; }
 
         @media (max-width: 600px) { h1 { font-size: 2.2rem; } }
     </style>
@@ -151,7 +146,7 @@
                 <div class="card-back">
                     <h3>First Watch</h3>
                     <p>Classic and sweet, just like you.</p>
-                    <a href="https://maps.app.goo.gl/N1NzoV6iMekYCef98" target="_blank" class="directions-link">
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">
                         <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Let's Eat!
                     </a>
@@ -168,7 +163,7 @@
                 <div class="card-back">
                     <h3>Arkadia Retrocade</h3>
                     <p>$5. Play anything.</p>
-                    <a href="https://maps.app.goo.gl/ei5Mep3U7i3BB1TWA" target="_blank" class="directions-link">Game on!</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Game on!</a>
                 </div>
             </div>
         </div>
@@ -181,8 +176,8 @@
                 </div>
                 <div class="card-back">
                     <h3>King of the Rings</h3>
-                    <p>You've kept your uncle's ring a secret for 17 years. Now a wizard tells you your life depends on taking it and fleeing your home before the spies arrive But first, you have to find it!</p>
-                    <a href="https://maps.app.goo.gl/Hj4WK1DFsmfUXX6c6" target="_blank" class="directions-link">Let's Go!</a>
+                    <p>Find the ring before the spies arrive. The mission depends on you!</p>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Start Quest</a>
                 </div>
             </div>
         </div>
@@ -196,7 +191,7 @@
                 <div class="card-back">
                     <h3>The Star on Spring</h3>
                     <p>Dropping the gear and prepping for the night.</p>
-                    <a href="https://maps.app.goo.gl/tozXkBib1SmTjre89" target="_blank" class="directions-link">Check in!</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Navigate</a>
                 </div>
             </div>
         </div>
@@ -210,7 +205,7 @@
                 <div class="card-back">
                     <h3>The Feast</h3>
                     <p>A celebratory dinner with the crew.</p>
-                    <a href="INSERT_MAPS_LINK_HERE" target="_blank" class="directions-link">GET NAV DATA</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Get Nav Data</a>
                 </div>
             </div>
         </div>
@@ -224,7 +219,7 @@
                 <div class="card-back">
                     <h3>Crunch Time</h3>
                     <p>The main event. Maximum adrenaline.</p>
-                    <a href="INSERT_MAPS_LINK_HERE" target="_blank" class="directions-link">GET NAV DATA</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Get Nav Data</a>
                 </div>
             </div>
         </div>
@@ -241,7 +236,7 @@
                 <div class="card-back">
                     <h3>System Reboot</h3>
                     <p>A quiet morning with premium caffeine.</p>
-                    <a href="INSERT_MAPS_LINK_HERE" target="_blank" class="directions-link">GET NAV DATA</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Get Nav Data</a>
                 </div>
             </div>
         </div>
@@ -255,7 +250,7 @@
                 <div class="card-back">
                     <h3>Sunday Fuel</h3>
                     <p>Classic breakfast before the hunt.</p>
-                    <a href="INSERT_MAPS_LINK_HERE" target="_blank" class="directions-link">GET NAV DATA</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Get Nav Data</a>
                 </div>
             </div>
         </div>
@@ -269,7 +264,7 @@
                 <div class="card-back">
                     <h3>The Hunt</h3>
                     <p>Finding treasures and vintage finds.</p>
-                    <a href="INSERT_MAPS_LINK_HERE" target="_blank" class="directions-link">GET NAV DATA</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Get Nav Data</a>
                 </div>
             </div>
         </div>
@@ -283,23 +278,26 @@
                 <div class="card-back">
                     <h3>Final Debrief</h3>
                     <p>Birthday toast and a final meal.</p>
-                    <a href="INSERT_MAPS_LINK_HERE" target="_blank" class="directions-link">GET NAV DATA</a>
+                    <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">Get Nav Data</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // HANDLE FLIP Logic: Prevents flip if clicking the button
         function handleFlip(card, event) {
-            // If the thing clicked is the link or inside the link, don't flip
-            if (event.target.closest('.directions-link')) {
-                return; 
+            // Check if the click started or ended on the link button
+            if (event.target.tagName === 'A' || event.target.closest('.directions-link')) {
+                // If it's the button, we stop the card from flipping.
+                // The browser will naturally follow the href link in a new tab.
+                event.stopPropagation();
+                return;
             }
+            // Otherwise, flip the card
             card.classList.toggle('is-flipped');
         }
 
-        // Particle background generator
+        // Background particles
         for (let i = 0; i < 20; i++) {
             let p = document.createElement('div');
             p.className = 'particle';
