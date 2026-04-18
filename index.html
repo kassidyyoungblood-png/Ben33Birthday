@@ -22,44 +22,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
-        }
-
-        .particle {
-            position: fixed;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
         }
 
         header { text-align: center; margin-bottom: 60px; }
-        
-        h1 { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 3rem; 
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 0;
-            color: var(--neon-white);
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        .day-label {
-            width: 100%; max-width: 1000px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem; margin: 40px 0 20px 0;
-            color: var(--neon-blue);
-            border-left: 4px solid var(--neon-blue);
-            padding-left: 15px;
-        }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; text-shadow: 0 0 10px var(--neon-blue); }
 
         .vision-board {
             display: grid;
@@ -67,72 +33,70 @@
             gap: 30px;
             width: 100%;
             max-width: 1000px;
-            perspective: 1500px;
+            perspective: 1500px; /* Crucial for 3D depth */
         }
 
-        .card-container { 
-            height: var(--card-height); 
-            cursor: pointer; 
-            -webkit-tap-highlight-color: transparent;
-        }
+        .card-container { height: var(--card-height); cursor: pointer; }
 
         .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d; /* Keep front and back on different planes */
         }
 
-        .card-container.is-flipped .card-inner { transform: rotateY(180deg); }
+        .card-container.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
 
+        /* Shared sides styling */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
             border-radius: 20px;
             overflow: hidden;
-            border: 2px solid rgba(0, 210, 255, 0.2);
+            backface-visibility: hidden; /* Hides the reverse side */
+            -webkit-backface-visibility: hidden;
         }
 
-        .card-front { 
-            background: #000; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-end; 
+        /* Front specific */
+        .card-front {
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            z-index: 2; /* Ensure front is on top */
+            transform: rotateY(0deg); /* Explicitly set base rotation */
         }
 
-        .card-bg { 
-            position: absolute; 
-            top: 0; left: 0; width: 100%; height: 100%; 
-            background-size: cover; 
-            background-position: center; 
-            filter: brightness(0.6); 
-            z-index: 1;
+        .card-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6);
         }
 
         .card-content-front {
             position: relative;
-            z-index: 2;
             padding: 25px;
             background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 50%, transparent 100%);
+            z-index: 3;
         }
 
-        .card-content-front h3 { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 1.4rem; 
-            margin: 0; 
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,1);
+        .card-content-front h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin: 0;
             text-transform: uppercase;
         }
 
+        /* Back specific */
         .card-back {
             background-color: #0d0e14;
             color: #fff;
-            transform: rotateY(180deg);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -140,6 +104,7 @@
             padding: 30px;
             box-sizing: border-box;
             border: 2px solid var(--neon-blue);
+            transform: rotateY(180deg); /* This flips the back so it faces the "other way" */
         }
 
         .card-back h3 { color: var(--neon-blue); font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
@@ -155,44 +120,46 @@
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
         }
+        
+        .directions-link svg { fill: currentColor; }
 
-        .directions-link svg {
-            fill: currentColor;
+        .day-label {
+            width: 100%; max-width: 1000px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            border-left: 4px solid var(--neon-blue);
+            padding-left: 15px;
+            margin: 40px 0 20px 0;
         }
-
-        .directions-link:hover { box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.05); }
-
-        @media (max-width: 600px) { h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
 
     <header>
         <h1>LEVEL 33</h1>
-        <p style="color: var(--neon-blue); letter-spacing: 2px;">BIRTHDAY PROTOCOL // ACTIVE</p>
     </header>
 
     <div class="day-label">PHASE 01 // SATURDAY</div>
     <div class="vision-board">
         <div class="card-container" onclick="handleFlip(this, event)">
             <div class="card-inner">
+                
                 <div class="card-front">
                     <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=500');"></div>
                     <div class="card-content-front"><h3>Brunch</h3></div>
                 </div>
+
                 <div class="card-back">
                     <h3>The Kickoff</h3>
-                    <p>Fueling up at First Watch.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
+                    <p>Fueling up for the big mission.</p>
+                    <a href="#" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
                     </a>
                 </div>
+
             </div>
         </div>
 
@@ -204,8 +171,8 @@
                 </div>
                 <div class="card-back">
                     <h3>Game Time</h3>
-                    <p>Retro gaming at Arkadia.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
+                    <p>Neon competition and retro classics.</p>
+                    <a href="#" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
                     </a>
@@ -213,163 +180,15 @@
             </div>
         </div>
 
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1519074063912-ad2a0522708f?w=500');"></div>
-                    <div class="card-content-front"><h3>Escape Room</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>King of the Rings</h3>
-                    <p>Find the ring before the spies arrive.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
         </div>
-
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500');"></div>
-                    <div class="card-content-front"><h3>Check-In</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>Base Camp</h3>
-                    <p>The Star on Spring.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500');"></div>
-                    <div class="card-content-front"><h3>Dinner</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>The Feast</h3>
-                    <p>Celebratory dinner with the crew.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1599409673963-8f304a558000?w=500');"></div>
-                    <div class="card-content-front"><h3>Derby</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>Demolition</h3>
-                    <p>The main event at 6:30.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="day-label">PHASE 02 // SUNDAY</div>
-    <div class="vision-board">
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500');"></div>
-                    <div class="card-content-front"><h3>Coffee</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>Reboot</h3>
-                    <p>Morning caffeine fix.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=500');"></div>
-                    <div class="card-content-front"><h3>Breakfast</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>Fuel</h3>
-                    <p>Recovery meal.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1531053270060-6643c5e707fe?w=500');"></div>
-                    <div class="card-content-front"><h3>Flea Market</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>The Hunt</h3>
-                    <p>Vintage gear searching.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container" onclick="handleFlip(this, event)">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500');"></div>
-                    <div class="card-content-front"><h3>Brewery</h3></div>
-                </div>
-                <div class="card-back">
-                    <h3>Finale</h3>
-                    <p>One last birthday toast.</p>
-                    <a href="YOUR_MAPS_LINK" target="_blank" class="directions-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Navigate
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         function handleFlip(card, event) {
+            // Prevent flip if clicking the button
             if (event.target.closest('.directions-link')) {
                 return;
             }
             card.classList.toggle('is-flipped');
-        }
-
-        for (let i = 0; i < 20; i++) {
-            let p = document.createElement('div');
-            p.className = 'particle';
-            p.style.width = Math.random() * 5 + 'px';
-            p.style.height = p.style.width;
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            p.style.animationDelay = (Math.random() * 5) + 's';
-            document.body.appendChild(p);
         }
     </script>
 </body>
