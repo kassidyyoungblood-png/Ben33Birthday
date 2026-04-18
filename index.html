@@ -93,23 +93,18 @@
             filter: brightness(0.6);
         }
 
-       .card-content-front {
-    position: relative; 
-    padding: 25px;
-    /* This makes the bottom 40% of the card a dark, solid-to-transparent fade */
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, transparent 100%);
-    z-index: 2;
-}
+        .card-content-front {
+            position: relative; padding: 25px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+        }
+        .card-content-front h3 { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; margin: 0; }
 
-.card-content-front h3 { 
-    font-family: 'Orbitron', sans-serif; 
-    font-size: 1.3rem; 
-    margin: 0;
-    color: #ffffff;
-    /* This "glow" shadow makes white text readable on ANY background */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0, 210, 255, 0.4);
-    letter-spacing: 1px;
-}
+        .card-back {
+            background-color: #0d0e14; color: #fff;
+            transform: rotateY(180deg);
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; padding: 30px; box-sizing: border-box;
+            border: 2px solid var(--neon-blue);
         }
 
         .card-back h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 15px; color: var(--neon-blue); }
@@ -144,19 +139,18 @@
     <div class="vision-board">
         <div class="card-container" onclick="handleFlip(this, event)">
             <div class="card-inner">
-                
-            <div class="card-front">
-                <div class="card-bg" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-KtQpxwxJgTuSUJ4xi-HcDbC25LCwA0RBq3S5mMmOGXDZAACyx55qrzJCIU3Y2uK5xCXthm8rXWsoib39v3GVotlFkJbt5irQullaIg&s=10');"></div>
-                <div class="card-content-front">
-                    <h3>Brunch - 10:30</h3> </div>
+                <div class="card-front">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=500')"></div>
+                    <div class="card-content-front"><h3>Brunch - 10:30</h3></div>
                 </div>
                 <div class="card-back">
                     <h3>First Watch</h3>
                     <p>Classic and sweet, just like you.</p>
                     <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="directions-link">
                         <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Let's Eat!</a>
-            </div>
+                        Let's Eat!
+                    </a>
+                </div>
             </div>
         </div>
 
