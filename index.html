@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        /* Particle Background */
+        /* Particles */
         .particle {
             position: fixed;
             background: rgba(255, 255, 255, 0.2);
@@ -78,51 +78,48 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-       .card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Fail-safe for mobile 3D rendering */
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d; 
-}
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
 
-.card-front { 
-    background: #000; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; 
-    /* Pushes front 1px forward so it doesn't 'touch' the back */
-    transform: rotateY(0deg) translateZ(1px);
-    z-index: 2;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
+        .card-container.is-flipped .card-inner { transform: rotateY(180deg); }
 
-.card-back {
-    background-color: #0d0e14;
-    color: #fff;
-    /* Flips the back and pushes it 1px away */
-    transform: rotateY(180deg) translateZ(1px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    box-sizing: border-box;
-    border: 2px solid var(--neon-blue);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 210, 255, 0.2);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-        /* Front Side */
+        /* Hover Effects */
+        .card-container:hover .card-front,
+        .card-container:hover .card-back {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+        }
+
+        .card-container:hover .card-bg {
+            transform: scale(1.05);
+        }
+
+        /* Front Side Styling */
         .card-front { 
             background: #000; 
             display: flex; 
             flex-direction: column; 
             justify-content: flex-end; 
-            transform: rotateY(0deg);
+            transform: rotateY(0deg) translateZ(1px); /* Fixed Mirroring */
+            z-index: 2;
         }
 
         .card-bg { 
@@ -132,6 +129,7 @@
             background-position: center; 
             filter: brightness(0.6); 
             z-index: 1;
+            transition: transform 0.5s ease;
         }
 
         .card-content-front {
@@ -148,13 +146,14 @@
             color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0,0,0,1);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Back Side */
+        /* Back Side Styling */
         .card-back {
             background-color: #0d0e14;
             color: #fff;
-            transform: rotateY(180deg);
+            transform: rotateY(180deg) translateZ(1px); /* Fixed Mirroring */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -164,7 +163,7 @@
             border: 2px solid var(--neon-blue);
         }
 
-        .card-back h3 { color: var(--neon-blue); font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
+        .card-back h3 { color: var(--neon-blue); font-family: 'Orbitron', sans-serif; margin-bottom: 10px; text-transform: uppercase; }
         .card-back p { text-align: center; font-size: 0.9rem; line-height: 1.5; color: #ddd; margin-bottom: 25px; }
 
         .directions-link {
@@ -206,7 +205,7 @@
                 </div>
                 <div class="card-back">
                     <h3>The Kickoff</h3>
-                    <p>Fueling up for the big mission.</p>
+                    <p>Fueling up for the big mission at First Watch.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -223,7 +222,7 @@
                 </div>
                 <div class="card-back">
                     <h3>High Score</h3>
-                    <p>Neon competition and retro classics.</p>
+                    <p>Retro gaming and neon competition at Arkadia.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -240,7 +239,7 @@
                 </div>
                 <div class="card-back">
                     <h3>The Puzzle</h3>
-                    <p>Break out before the timer hits zero.</p>
+                    <p>King of the Rings: Secure the artifact before time runs out.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -257,7 +256,7 @@
                 </div>
                 <div class="card-back">
                     <h3>Base Camp</h3>
-                    <p>The Star on Spring. Drop the gear.</p>
+                    <p>The Star on Spring. Secure the perimeter and drop the gear.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -274,7 +273,7 @@
                 </div>
                 <div class="card-back">
                     <h3>The Feast</h3>
-                    <p>Celebratory dinner for the legend.</p>
+                    <p>Main group refueling for the Level 33 milestone.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -290,8 +289,8 @@
                     <div class="card-content-front"><h3>Derby</h3></div>
                 </div>
                 <div class="card-back">
-                    <h3>Crunch Time</h3>
-                    <p>Metal crunching main event at 6:30.</p>
+                    <h3>Demolition</h3>
+                    <p>Metal-crunching finale at the fairgrounds. 6:30 Sharp.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -311,7 +310,7 @@
                 </div>
                 <div class="card-back">
                     <h3>Reboot</h3>
-                    <p>Premium morning caffeine fix.</p>
+                    <p>System restart with high-grade caffeine.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -327,8 +326,8 @@
                     <div class="card-content-front"><h3>Breakfast</h3></div>
                 </div>
                 <div class="card-back">
-                    <h3>Fuel</h3>
-                    <p>Post-derby recovery meal.</p>
+                    <h3>Recovery</h3>
+                    <p>Post-derby fuel for the journey home.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -345,7 +344,7 @@
                 </div>
                 <div class="card-back">
                     <h3>The Hunt</h3>
-                    <p>Searching for vintage treasures.</p>
+                    <p>Searching the archives for vintage gear.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -362,7 +361,7 @@
                 </div>
                 <div class="card-back">
                     <h3>Finale</h3>
-                    <p>Final birthday toast with the crew.</p>
+                    <p>Final mission debrief and birthday toast.</p>
                     <a href="YOUR_LINK" target="_blank" class="directions-link">
                         <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                         Navigate
@@ -373,7 +372,7 @@
     </div>
 
     <script>
-        // Flip Logic
+        // Flip Mechanic - Ignores clicks on buttons
         function handleFlip(card, event) {
             if (event.target.closest('.directions-link')) {
                 return;
@@ -381,8 +380,8 @@
             card.classList.toggle('is-flipped');
         }
 
-        // Particle Generation
-        for (let i = 0; i < 20; i++) {
+        // Background Atmosphere
+        for (let i = 0; i < 25; i++) {
             let p = document.createElement('div');
             p.className = 'particle';
             p.style.width = Math.random() * 5 + 'px';
