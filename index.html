@@ -93,19 +93,23 @@
             filter: brightness(0.6);
         }
 
-        .card-content-front {
-            position: relative; padding: 25px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent 100%);
-            z-index: 2;
-        }
-        .card-content-front h3 { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; margin: 0; }
+       .card-content-front {
+    position: relative; 
+    padding: 25px;
+    /* This makes the bottom 40% of the card a dark, solid-to-transparent fade */
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, transparent 100%);
+    z-index: 2;
+}
 
-        .card-back {
-            background-color: #0d0e14; color: #fff;
-            transform: rotateY(180deg);
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; padding: 30px; box-sizing: border-box;
-            border: 2px solid var(--neon-blue);
+.card-content-front h3 { 
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 1.3rem; 
+    margin: 0;
+    color: #ffffff;
+    /* This "glow" shadow makes white text readable on ANY background */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0, 210, 255, 0.4);
+    letter-spacing: 1px;
+}
         }
 
         .card-back h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 15px; color: var(--neon-blue); }
